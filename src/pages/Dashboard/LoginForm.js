@@ -18,7 +18,7 @@ const LoginForm = () => {
 
     dispatch(registerUser(data));
 
-    if (data.password != 12345678) {
+    if (data.password !== 12345678) {
       toast.error("You have entered an invalid phone number or password ");
     } else {
       navigate("/dashboard");

@@ -21,13 +21,13 @@ const DashProducts = () => {
         {" "}
         Store Products
       </h2>
-      <div className=" mx-auto flex flex-row">
-        <div className="text-center">
+      <div className=" ">
+        <div className="flex flex-wrap mt-10 ">
           {products &&
             products.map((product) => (
-              <div className="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+              <div className="bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl mx-2">
                 <LazyLoadImage
-                  className=" rounded-t-md"
+                  className=" rounded-t-md w-[400px] h-[640px] my-5"
                   alt={product.name}
                   src={product.images[0]} // use normal <img> attributes as props
                 />

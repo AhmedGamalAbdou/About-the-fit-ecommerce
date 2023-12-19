@@ -8,8 +8,7 @@ import { getProductById } from "../redux/slices/productSlice";
 const ProductView = () => {
   const { productid } = useParams();
   const [qty, setQty] = useState(1);
-  const SLIDE_COUNT = 3;
-  const slides = Array.from(Array(SLIDE_COUNT).keys());
+
   const { productInfo, isLoading } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 

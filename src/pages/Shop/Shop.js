@@ -18,14 +18,14 @@ const Shop = () => {
     <Loading />
   ) : (
     <div className=" flex ">
-      <div className="flex mt-10 ">
+      <div className="flex flex-wrap mt-10 ">
         {products &&
           products.map((product) => (
             <section key={product._id}>
               <div className=" bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl mx-2">
                 <Link to={`/ProductView/${product._id}`}>
                   <LazyLoadImage
-                    className=" rounded-t-md  w-[500px] h-[600px] "
+                    className=" rounded-t-md  w-[450px] h-[600px] mx-2 my-5"
                     alt={product.name}
                     src={product.images[0]}
                     delayTime="500"
