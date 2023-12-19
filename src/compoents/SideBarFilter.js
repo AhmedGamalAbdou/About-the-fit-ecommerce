@@ -13,12 +13,21 @@ const SideBarFilter = () => {
   return loading ? (
     <Loading />
   ) : (
-    <div className="col-span-2 border-r border-gray-200 min-h-[90vh] w-[120px] lg:w-[250px] flex flex-col items-start justify-between pt-8 px-1">
-      <ul className="space-y-8 w-full font-bold  border-t-2 border-b-2 px-4 pt-8 pb-8 flex flex-col ">
-        <NavLink to="/shop"> all</NavLink>
+    <div className=" md:flex md:mx-16 lg:mx-24 w-full  hidden mt-10 ">
+      <ul className="space-y-8    px-2 pt-8 pb-8 flex flex-col  ">
+        <p className="text-center uppercase text-xl"> Categories </p>
+
+        <NavLink to="/shop" className="text-center text-lg capitalize  ">
+          {" "}
+          all
+        </NavLink>
         {categories &&
           categories.map((category) => (
-            <NavLink to={`category/${category._id}`} key={category._id}>
+            <NavLink
+              to={`category/${category._id}`}
+              key={category._id}
+              className="text-center text-lg capitalize  "
+            >
               {category.name}
             </NavLink>
           ))}

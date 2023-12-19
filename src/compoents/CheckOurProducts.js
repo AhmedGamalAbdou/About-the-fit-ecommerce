@@ -19,7 +19,7 @@ const CheckOurProducts = () => {
         check our product
       </h2>
 
-      <div className="w-fit  mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+      <div className="md:mx-16 lg:mx-32 mx-2  md:text-left text-center">
         {products &&
           products.map((product) => (
             <section key={product._id}>

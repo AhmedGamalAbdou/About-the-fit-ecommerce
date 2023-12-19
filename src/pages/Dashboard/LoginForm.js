@@ -1,12 +1,11 @@
 import { React, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const phonenumber = useRef(null);
   const password = useRef(null);

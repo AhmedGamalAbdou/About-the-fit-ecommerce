@@ -8,8 +8,8 @@ const TrendingNow = () => {
         You May Also Like
       </h2>
 
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col mx-5">
+      <div className="flex flex-col md:text-left text-center justify-between md:flex-row">
+        <div className="">
           <h1 className="text-4xl "> Favourits </h1>
           <p className="text-lg">
             {" "}
