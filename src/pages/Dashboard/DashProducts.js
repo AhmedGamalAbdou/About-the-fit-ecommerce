@@ -16,18 +16,18 @@ const DashProducts = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div>
-      <h2 className="text-2xl px-8 py-8  text-blue-400 font-bold">
+    <div className="">
+      <h2 className="text-2xl px-2 py-8  text-blue-400 font-bold">
         {" "}
         Store Products
       </h2>
-      <div className=" ">
-        <div className="flex flex-wrap mt-10 ">
+      <div className=" flex-col md:flex mx-4">
+        <div className="flex flex-wrap mt-10  ">
           {products &&
             products.map((product) => (
               <div className="bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl mx-2">
                 <LazyLoadImage
-                  className=" rounded-t-md w-[400px] h-[640px] my-5"
+                  className=" rounded-t-md w-[460px] h-[640px] my-5"
                   alt={product.name}
                   src={product.images[0]} // use normal <img> attributes as props
                 />

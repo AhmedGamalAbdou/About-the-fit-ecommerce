@@ -1,16 +1,16 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+
 const HomeCarsouel = () => {
   return (
     <section className=" mx-2 mb-8   pt-24 font-medium md:mx-32 ">
       <div className=" flex justify-between items-center flex-col 2xl:flex-row ">
         <div className="text-center  2xl:text-left mx-5">
-          <p className="text-4xl font-bold lg:text-8xl text-black whitespace-nowrap ">
+          <p className="text-4xl font-bold lg:text-8xl text-black whitespace-nowrap capitalize">
             With About the fit <br />
             you will never <br />
             go out of style
           </p>
-          <p className="mt-10 text-lg ">
+          <p className="mt-10 text-lg  ">
             {" "}
             "Fashion you can buy, but style you possess. The key to style is
             learning who you are”

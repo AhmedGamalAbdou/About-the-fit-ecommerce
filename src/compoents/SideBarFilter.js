@@ -7,6 +7,8 @@ import { Loading } from "./Loading";
 const SideBarFilter = () => {
   const dispatch = useDispatch();
   const { categories, loading } = useSelector((state) => state.categories);
+  const activeLink = "text-blue-400  text-center text-lg capitalize";
+  const normalLink = "text-center text-lg capitalize ";
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -26,7 +28,7 @@ const SideBarFilter = () => {
             <NavLink
               to={`category/${category._id}`}
               key={category._id}
-              className="text-center text-lg capitalize  "
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
             >
               {category.name}
             </NavLink>

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ClickOutsideFucn } from "../compoents/ClickOutside";
 import { getCategories } from "../redux/slices/categorySlice";
+import { logout } from "../redux/slices/authSlice";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +18,13 @@ const Header = () => {
   let menuNode = ClickOutsideFucn(() => {
     setIsMenuOpen(false);
   });
+  const activeLink = "text-blue-400";
+  const normalLink = "";
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -118,26 +125,15 @@ const Header = () => {
                   </span>
                 </NavLink>
 
-                <NavLink
-                  to="/login"
-                  className=" hover:text-white  text-xs cursor-pointer font-bold "
-                  title="login"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="hover:fill-cyan-700 w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </NavLink>
+                <div>
+                  {isLoggedIn ? (
+                    <div>
+                      <button onClick={handleLogout}>Logout</button>
+                    </div>
+                  ) : (
+                    <NavLink to="/login">Login</NavLink>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -183,8 +179,11 @@ const Header = () => {
             {categories &&
               categories.map((category) => (
                 <NavLink
+                  className={({ isActive }) =>
+                    isActive ? activeLink : normalLink
+                  }
+                  onClick={() => setIsMenuOpen((isMenuOpen) => !isMenuOpen)}
                   to={`/shop/category/${category._id}`}
-                  className=" hover:text-white text-lg  my-1 cursor-pointer hover:underline capitalize "
                   key={category._id}
                 >
                   {category.name}

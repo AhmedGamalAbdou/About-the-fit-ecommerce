@@ -21,7 +21,6 @@ import AddProduct from "./pages/Dashboard/AddProduct";
 import Cart from "./pages/Cart";
 import ProductView from "./pages/ProductView";
 import Checkout from "./pages/Checkout";
-import LoginForm from "./pages/Dashboard/LoginForm";
 
 import Shop from "./pages/Shop/Shop";
 import DashCategories from "./pages/Dashboard/DashCategories";
@@ -30,6 +29,9 @@ import ShopCategory from "./pages/Shop/ShopCategory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import About from "./pages/About";
+import Register from "./pages/Login/Register";
+import Login from "./pages/Login/Login";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +46,8 @@ const router = createBrowserRouter([
       { path: "ProductView/:productid", element: <ProductView /> },
       { path: "checkout", element: <Checkout /> },
       { path: "about", element: <About /> },
+      { path: "register", element: <Register /> },
+      { path: "login", element: <Login /> },
     ],
   },
 
@@ -71,11 +75,6 @@ const router = createBrowserRouter([
       { path: "addcategory", element: <AddCategory /> },
       // { path: 'products/edit/:productid', element: <DashEditpage /> },
     ],
-  },
-
-  {
-    path: "/login",
-    element: <LoginForm />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
