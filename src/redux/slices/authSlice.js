@@ -8,7 +8,7 @@ const userToken = localStorage.getItem("userToken")
 
 const initialState = {
   loading: false,
-  userInfo: {}, // for user object
+  userInfo: [], // for user object
   userToken, // for storing the JWT
   error: null,
   isLoggedIn: false, // for monitoring the registration process.
@@ -56,7 +56,7 @@ export const userLogin = createAsyncThunk(
       );
       // store user's token in local storage
       localStorage.setItem("userToken", data.userToken);
-      return data;
+      return data.data;
     } catch (error) {
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
@@ -81,37 +81,38 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
     },
   },
-  extraReducers: {
-    // login user
-    [userLogin.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    [userLogin.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.userInfo = payload;
-      state.userToken = payload.userToken;
-      state.isLoggedIn = true;
-    },
-    [userLogin.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      // login user
+      .addCase(userLogin.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(userLogin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userInfo = action.payload;
+        state.userToken = action.userToken;
+        state.isLoggedIn = true;
+      })
+      .addCase(userLogin.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
 
-    // register user
-
-    [registerUser.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    [registerUser.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.isLoggedIn = true; // registration successful
-    },
-    [registerUser.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
-    },
+      // register user
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userInfo = action.payload;
+        state.isLoggedIn = true; // registration successful
+      })
+      .addCase(registerUser.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      });
   },
 });
 export const { logout } = authSlice.actions;

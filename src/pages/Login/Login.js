@@ -8,9 +8,10 @@ const Login = () => {
 
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const submitForm = async (data) => {
-    dispatch(userLogin(data));
-    navigate("/");
+  const submitForm = async (data, e) => {
+    e.preventDefault();
+    await dispatch(userLogin(data));
+    navigate("/dashboard");
   };
 
   return (
@@ -48,6 +49,14 @@ const Login = () => {
               Login
             </button>
           </form>
+          <div>
+            <p className="text center text-xl capitalize ">
+              {" "}
+              sign to admin dashboard:
+            </p>
+            <p>phoneNumber: 1234567891 </p>
+            <p>password: 12345678 </p>
+          </div>
         </div>
       </div>
     </div>

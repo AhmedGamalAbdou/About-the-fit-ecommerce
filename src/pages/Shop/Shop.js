@@ -49,9 +49,7 @@ const Shop = () => {
                     </del>
                     <div className="ml-auto">
                       <svg
-                        onClick={() =>
-                          dispatch(addToCart({ ...product, qty: 1 }))
-                        }
+                        onClick={() => dispatch(addToCart({ ...product }))}
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"

@@ -1,14 +1,17 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteFromCart } from "../redux/slices/cartSlice";
+import {
+  deleteFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../redux/slices/cartSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { orderItems } = useSelector((state) => state.cart);
-  const totalPrice = orderItems.reduce((acc, product) => {
-    acc += product.price * product.qty;
+  const { cartItems } = useSelector((state) => state.cart);
+  const totalPrice = cartItems.reduce((acc, product) => {
+    acc += product.price * product.quantity;
     return acc;
   }, 0);
 
@@ -20,12 +23,13 @@ const Cart = () => {
           <tr>
             <th className="px-3 py-3 text-left">product</th>
             <th className="px-6 py-3"> Product name</th>
-            <th className="px-6 py-3">QUANTITY</th>
-            <th className="px-6 py-3">Price</th>
+            <th className="px-6 py-3">Quantity</th>
+            <th className="px-6 py-3">per piece price</th>
+            <th className="px-6 py-3">Remove</th>
           </tr>
         </thead>
         <tbody>
-          {orderItems.map((product) => (
+          {cartItems.map((product) => (
             <tr
               key={product.code}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center   "
@@ -41,10 +45,27 @@ const Cart = () => {
                 </Link>
               </td>
               <td className="px-6 py-3">{product.name} </td>
-              <td className="px-6 py-3"> {product.qty}</td>
               <td className="px-6 py-3">
+                {" "}
+                <div className="cartItem__incrDec">
+                  <button
+                    onClick={() => dispatch(decrementQuantity(product._id))}
+                  >
+                    -
+                  </button>
+                  <p>{product.quantity}</p>
+                  <button
+                    onClick={() => dispatch(incrementQuantity(product._id))}
+                  >
+                    +
+                  </button>
+                </div>
+              </td>
+              <td className="px-6 py-3">{product.price}</td>
+              <td>
+                {" "}
                 <button
-                  onClick={() => dispatch(deleteFromCart(product.id))}
+                  onClick={() => dispatch(deleteFromCart(product._id))}
                   className="text-red-600"
                 >
                   remove

@@ -9,25 +9,25 @@ import { logout } from "../redux/slices/authSlice";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { categories } = useSelector((state) => state.categories);
-  const { orderItems } = useSelector((state) => state.cart);
-  const totalquntity = orderItems.reduce((acc, product) => {
-    acc += product.qty;
+  const { cartItems } = useSelector((state) => state.cart);
+  const totalquntity = cartItems.reduce((acc, product) => {
+    acc += product.quantity;
     return acc;
   }, 0);
   const dispatch = useDispatch();
   let menuNode = ClickOutsideFucn(() => {
     setIsMenuOpen(false);
   });
-  const activeLink = "text-blue-400";
-  const normalLink = "";
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const handleLogout = () => {
     dispatch(logout());
   };
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
+
   return (
     <header className="z-[30] ">
       <div className="bg-black  text-zinc-50 hover:text-zinc-200  ">
@@ -179,11 +179,8 @@ const Header = () => {
             {categories &&
               categories.map((category) => (
                 <NavLink
-                  className={({ isActive }) =>
-                    isActive ? activeLink : normalLink
-                  }
-                  onClick={() => setIsMenuOpen((isMenuOpen) => !isMenuOpen)}
                   to={`/shop/category/${category._id}`}
+                  className=" hover:text-white text-lg  my-1 cursor-pointer hover:underline "
                   key={category._id}
                 >
                   {category.name}

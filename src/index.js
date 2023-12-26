@@ -17,11 +17,9 @@ import DashProducts from "./pages/Dashboard/DashProducts";
 import DashSubscribers from "./pages/Dashboard/DashSubscribers";
 import Msgs from "./pages/Dashboard/Msgs";
 import AddProduct from "./pages/Dashboard/AddProduct";
-
 import Cart from "./pages/Cart";
 import ProductView from "./pages/ProductView";
 import Checkout from "./pages/Checkout";
-
 import Shop from "./pages/Shop/Shop";
 import DashCategories from "./pages/Dashboard/DashCategories";
 import AddCategory from "./pages/Dashboard/AddCategory";
@@ -31,6 +29,7 @@ import "react-toastify/dist/ReactToastify.css";
 import About from "./pages/About";
 import Register from "./pages/Login/Register";
 import Login from "./pages/Login/Login";
+import ProtectedRoute from "./compoents/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -66,14 +65,21 @@ const router = createBrowserRouter([
     element: <LayoutDash />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Dashboard /> },
-      { path: "products", element: <DashProducts /> },
-      { path: "categories", element: <DashCategories /> },
-      { path: "subscibers", element: <DashSubscribers /> },
-      { path: "messages", element: <Msgs /> },
-      { path: "addproduct", element: <AddProduct /> },
-      { path: "addcategory", element: <AddCategory /> },
-      // { path: 'products/edit/:productid', element: <DashEditpage /> },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+          { path: "products", element: <DashProducts /> },
+          { path: "categories", element: <DashCategories /> },
+          { path: "subscibers", element: <DashSubscribers /> },
+          { path: "messages", element: <Msgs /> },
+          { path: "addproduct", element: <AddProduct /> },
+          { path: "addcategory", element: <AddCategory /> },
+        ],
+      },
     ],
   },
 ]);

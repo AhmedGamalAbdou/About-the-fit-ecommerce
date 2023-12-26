@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ClickOutsideFucn } from "../compoents/ClickOutside";
 import { useState } from "react";
+import { logout } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const NavDash = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +13,12 @@ const NavDash = () => {
   });
   const activeLink = "text-blue-400";
   const normalLink = "";
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="w-full flex bg-blue-400 justify-between items-center py-2 px-6 text-zinc-50 ">
       <div>
@@ -56,7 +64,7 @@ const NavDash = () => {
         </NavLink>
 
         <NavLink to="/">
-          <button> Logout </button>
+          <button onClick={handleLogout}>Logout</button>
         </NavLink>
       </div>
 

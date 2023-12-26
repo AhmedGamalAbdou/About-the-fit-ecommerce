@@ -111,13 +111,11 @@ export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id }, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
-    const userToken = localStorage.getItem("userToken");
 
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`,
         },
       };
 
