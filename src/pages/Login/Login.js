@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import { userLogin } from "../../redux/slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
 
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Login = () => {
     await dispatch(userLogin(data));
     navigate("/dashboard");
   };
+  console.log(userInfo);
 
   return (
     <div>

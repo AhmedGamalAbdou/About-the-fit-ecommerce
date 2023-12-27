@@ -16,7 +16,7 @@ const Cart = () => {
   }, 0);
 
   return (
-    <div className="container m-auto  h-full bg-gray-100 px-8 py-8 flex-col ">
+    <div className="container m-auto  h-full bg-gray-100 px-8 flex-col ">
       <h2 className="text-2xl text-black font-bold"> My Shopping Bag</h2>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center  ">

@@ -8,9 +8,9 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const { orderItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
   const { loading } = useSelector((state) => state.orders);
-  const totalPrice = orderItems.reduce((acc, product) => {
+  const totalPrice = cartItems.reduce((acc, product) => {
     acc += product.price * product.qty;
     return acc;
   }, 0);
@@ -30,7 +30,7 @@ const Checkout = () => {
     e.preventDefault();
     dispatch(
       createorders({
-        orderItems,
+        cartItems,
         shippingPrice: 0,
         totalPrice: totalPrice,
         user: {
@@ -164,7 +164,7 @@ const Checkout = () => {
                 </tr>
               </thead>
               <tbody>
-                {orderItems.map((product) => (
+                {cartItems.map((product) => (
                   <tr
                     key={product.code}
                     className="p-3 text-sm text-black border-b-2 border-gray-200   "
@@ -180,10 +180,10 @@ const Checkout = () => {
                       </Link>
                     </td>
                     <td>{product.name} </td>
-                    <td> {product.qty}</td>
+                    <td> {product.quantity}</td>
                     <td>
                       <button
-                        onClick={() => dispatch(deleteFromCart(product.id))}
+                        onClick={() => dispatch(deleteFromCart(product._id))}
                       >
                         remove
                       </button>

@@ -17,7 +17,6 @@ export const createCategory = createAsyncThunk(
         let config = {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
           },
         };
         const { data } = await axios.post(
