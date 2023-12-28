@@ -1,20 +1,22 @@
 import { useForm } from "react-hook-form";
 import { userLogin } from "../../redux/slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
 
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const submitForm = async (data, e) => {
     e.preventDefault();
     await dispatch(userLogin(data));
-    navigate("/dashboard");
+    if (data.phoneNumber === 1234567891) {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
+    }
   };
-  console.log(userInfo);
 
   return (
     <div>

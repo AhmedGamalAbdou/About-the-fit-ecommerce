@@ -2,34 +2,38 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./pages/Layout";
-import LayoutDash from "./pages/LayoutDash";
-import ErrorPage from "./pages/ErrorPage";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import Home from "./pages/Home";
+import Layout from "./pages/Layout";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
-import LayoutShop from "./pages/LayoutShop";
-import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
+
+import Register from "./pages/Login/Register";
+import Login from "./pages/Login/Login";
+import ProtectedRoute from "./compoents/ProtectedRoute";
+
+import LayoutDash from "./pages/LayoutDash";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import DashProducts from "./pages/Dashboard/DashProducts";
 import DashSubscribers from "./pages/Dashboard/DashSubscribers";
 import Msgs from "./pages/Dashboard/Msgs";
-import AddProduct from "./pages/Dashboard/AddProduct";
-import Cart from "./pages/Cart";
-import ProductView from "./pages/ProductView";
-import Checkout from "./pages/Checkout";
-import Shop from "./pages/Shop/Shop";
+import ErrorPage from "./pages/ErrorPage";
 import DashCategories from "./pages/Dashboard/DashCategories";
 import AddCategory from "./pages/Dashboard/AddCategory";
+import AddProduct from "./pages/Dashboard/AddProduct";
+
+import LayoutShop from "./pages/LayoutShop";
+import Shop from "./pages/Shop/Shop";
+import Cart from "./pages/Cart";
 import ShopCategory from "./pages/Shop/ShopCategory";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import About from "./pages/About";
-import Register from "./pages/Login/Register";
-import Login from "./pages/Login/Login";
-import ProtectedRoute from "./compoents/ProtectedRoute";
+import ProductView from "./pages/ProductView";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter([
   {

@@ -2,16 +2,19 @@ import { React, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Loading } from "../compoents/Loading";
-import { deleteFromCart } from "../redux/slices/cartSlice";
 import { createorders } from "../redux/slices/ordersSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import {
+  deleteFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../redux/slices/cartSlice";
 const Checkout = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
   const { loading } = useSelector((state) => state.orders);
   const totalPrice = cartItems.reduce((acc, product) => {
-    acc += product.price * product.qty;
+    acc += product.price * product.quantity;
     return acc;
   }, 0);
 
@@ -53,151 +56,157 @@ const Checkout = () => {
   ) : (
     <>
       <div></div>
-      <div className="h-full grid grid-cols-1 xl:grid-cols-5 col-span-10 w-full">
-        <div className="  col-span-2 w-full items-start justify-start flex flex-col px-12 pt-12 pb-6  ">
+      <div className="flex mx-2 mb-8 pt-10 font-medium md:mx-32  px-8 text-center md:text-left  ">
+        <div className="">
           <h2 className="mt-5 text-2xl "> Enter Your Shipping info</h2>
           <form onSubmit={onSubmit}>
             <h2 className="mt-2 text-md">Contact information</h2>
 
-            <div className="mt-4 flex space-x-4">
-              <input
-                type="text"
-                id="name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5  dark:border-gray-600 dark:focus:border-black  "
-                required
-                placeholder="Your Name "
-                ref={name}
-              />
+            <input
+              type="text"
+              id="name"
+              className="md:w-[650px] xs:w-[650px] px-5  py-2 border-1 mt-5 border border-solid border-gray-300"
+              required
+              placeholder="Your Name "
+              ref={name}
+            />
+            <input
+              type="text"
+              id="phonenumber"
+              className="md:w-[650px] xs:w-[650px] px-5  py-2 border-1 mt-5 border border-solid border-gray-300"
+              required
+              placeholder=" mobile phone number"
+              ref={phoneNumber}
+            />
+
+            <input
+              type="text"
+              id="Email"
+              className="md:w-[650px] xs:w-[650px] px-5  py-2 border-1 mt-5 border border-solid border-gray-300"
+              required
+              placeholder="Email "
+              ref={email}
+            />
+
+            <input
+              type="text"
+              id="Address"
+              className="md:w-[650px] xs:w-[650px] px-5  py-2 border-1 mt-5 border border-solid border-gray-300"
+              required
+              placeholder="Address "
+              ref={address}
+            />
+
+            <input
+              type="text"
+              id="City"
+              className="md:w-[650px] xs:w-[650px] px-5  py-2 border-1 mt-5 border border-solid border-gray-300"
+              required
+              placeholder="City "
+              ref={city}
+            />
+
+            <input
+              type="text"
+              id="postalCode"
+              className="md:w-[650px] xs:w-[650px] px-5  py-2 border-1 mt-5 border border-solid border-gray-300"
+              required
+              placeholder="postalCode "
+              ref={postalCode}
+            />
+
+            <input
+              type="text"
+              id="governorate"
+              className="md:w-[650px] xs:w-[650px] px-5  py-2 border-1 mt-5 border border-solid border-gray-300"
+              required
+              placeholder="governorate "
+              ref={governorate}
+            />
+            <p className="text-lg mt-2">
+              {" "}
+              Your Total Price Is :
+              <span className="text-2xl font-bold">{totalPrice}</span>
+            </p>
+
+            <div className="flex justify-center sm:justify-start mt-5">
+              <button
+                className="py-2 text-sm font-bold text-white uppercase bg-black rounded-sm px-8 ml-2  "
+                type="submit"
+              >
+                Place Order
+              </button>
             </div>
-            <div className="mt-4 flex space-x-4">
-              <input
-                type="text"
-                id="phonenumber"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-2/4 p-2.5  dark:border-gray-600 dark:focus:border-black  "
-                required
-                placeholder=" mobile phone number"
-                ref={phoneNumber}
-              />
 
-              <input
-                type="text"
-                id="Email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-2/4 p-2.5  dark:border-gray-600 dark:focus:border-black  "
-                required
-                placeholder="Email "
-                ref={email}
-              />
-            </div>
-
-            <div className="mt-4 flex space-x-4">
-              <input
-                type="text"
-                id="Address"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-2/4 p-2.5  dark:border-gray-600 dark:focus:border-black  "
-                required
-                placeholder="Address "
-                ref={address}
-              />
-
-              <input
-                type="text"
-                id="City"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-2/4 p-2.5  dark:border-gray-600 dark:focus:border-black  "
-                required
-                placeholder="City "
-                ref={city}
-              />
-            </div>
-
-            <div className="mt-4 flex space-x-4">
-              <input
-                type="text"
-                id="postalCode"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-2/4 p-2.5  dark:border-gray-600 dark:focus:border-black  "
-                required
-                placeholder="postalCode "
-                ref={postalCode}
-              />
-
-              <input
-                type="text"
-                id="governorate"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-2/4 p-2.5  dark:border-gray-600 dark:focus:border-black  "
-                required
-                placeholder="governorate "
-                ref={governorate}
-              />
-            </div>
-
-            <div className="flex justify-between mx-5 mt-5">
-              <div className="flex">
-                <Link to="/cart">
-                  {" "}
-                  <button className="py-2 text-sm font-bold text-white uppercase bg-black rounded-sm px-8">
-                    Return To Cart
-                  </button>
-                </Link>
-              </div>
-
-              <div className="flex">
-                <button
-                  className="py-2 text-sm font-bold text-white uppercase bg-black rounded-sm px-8"
-                  type="submit"
-                >
-                  Place Order
+            <div className="flex justify-center sm:justify-start mt-5">
+              <Link to="/cart">
+                {" "}
+                <button className="py-2 text-sm font-bold text-white uppercase bg-black rounded-sm px-8 ml-2  ">
+                  back to cart
                 </button>
-              </div>
+              </Link>
             </div>
           </form>
         </div>
 
-        <div className="hidden md:col-span-3 md:items-start md:justify-start md:flex md:flex-col md:w-full md:pt-12 md:pb-6">
-          <div className="container m-auto  h-[90vh] bg-gray-100 px-8 py-8 flex-col">
-            <h2 className="text-2xl text-teal-800 font-bold"> My order list</h2>
-            <table className="w-full border-separate border-spacing-2 border border-slate-500 mt-2">
-              <thead className="bg-gray-100 border-b-2 border-gray-200  text-left ">
-                <tr>
-                  <th>product</th>
-                  <th> Product name</th>
-                  <th>QUANTITY</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cartItems.map((product) => (
-                  <tr
-                    key={product.code}
-                    className="p-3 text-sm text-black border-b-2 border-gray-200   "
-                  >
-                    <td>
-                      <Link to={`/ProductView/${product._id}`}>
-                        <LazyLoadImage
-                          className=" rounded-t-md w-20 h-20 object-contain	 "
-                          alt={product.name}
-                          src={product.images[0]}
-                          delayTime="500"
-                        />
-                      </Link>
-                    </td>
-                    <td>{product.name} </td>
-                    <td> {product.quantity}</td>
-                    <td>
+        <div className=" hidden sm:block">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center  ">
+              <tr>
+                <th className="px-3 py-3 text-left">product</th>
+                <th className="px-6 py-3"> Product name</th>
+                <th className="px-6 py-3">Quantity</th>
+                <th className="px-6 py-3">per piece price</th>
+                <th className="px-6 py-3">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((product) => (
+                <tr
+                  key={product.code}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center   "
+                >
+                  <td>
+                    <Link to={`/ProductView/${product._id}`}>
+                      <LazyLoadImage
+                        className=" rounded-t-md w-20 h-20 object-contain my-5 "
+                        alt={product.name}
+                        src={product.images[0]}
+                        delayTime="500"
+                      />
+                    </Link>
+                  </td>
+                  <td className="px-6 py-3">{product.name} </td>
+                  <td className="px-6 py-3">
+                    {" "}
+                    <div className="">
                       <button
-                        onClick={() => dispatch(deleteFromCart(product._id))}
+                        onClick={() => dispatch(decrementQuantity(product._id))}
                       >
-                        remove
+                        -
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className=" flex justify-between mx-5">
-              <div>
-                <p> your total price is : {totalPrice} EGP</p>
-              </div>
-            </div>
-          </div>
+                      <p>{product.quantity}</p>
+                      <button
+                        onClick={() => dispatch(incrementQuantity(product._id))}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </td>
+                  <td className="px-6 py-3">{product.price}</td>
+                  <td>
+                    {" "}
+                    <button
+                      onClick={() => dispatch(deleteFromCart(product._id))}
+                      className="text-red-600"
+                    >
+                      remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </>
