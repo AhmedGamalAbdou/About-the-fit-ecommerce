@@ -11,7 +11,7 @@ const Login = () => {
   const submitForm = async (data, e) => {
     e.preventDefault();
     await dispatch(userLogin(data));
-    if (data.phoneNumber === 1234567891) {
+    if (data.phoneNumber === '1234567891') {
       navigate("/dashboard");
     } else {
       navigate("/");
