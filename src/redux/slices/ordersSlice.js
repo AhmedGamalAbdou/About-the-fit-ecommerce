@@ -52,6 +52,7 @@ export const getorders = createAsyncThunk(
         let config = {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         };
         const { data } = await axios.get("/api/orders", config);

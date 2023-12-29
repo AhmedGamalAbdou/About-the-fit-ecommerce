@@ -2,14 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const userToken = localStorage.getItem("userToken")
-  ? localStorage.getItem("userToken")
-  : null;
-
 const initialState = {
   loading: false,
   userInfo: [], // for user object
-  userToken, // for storing the JWT
+  userToken: localStorage.getItem("userToken"), // for storing the JWT
   error: null,
   isLoggedIn: false, // for monitoring the registration process.
 };
@@ -54,9 +50,10 @@ export const userLogin = createAsyncThunk(
         { phoneNumber, password },
         config
       );
+      console.log(data);
       // store user's token in local storage
-      localStorage.setItem("userToken", data.userToken);
-      return data.data;
+      localStorage.setItem("userToken", data.token);
+      return data;
     } catch (error) {
       // return custom error message from API if any
       if (error.response && error.response.data.message) {
@@ -91,12 +88,13 @@ const authSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.userInfo = action.payload;
-        state.userToken = action.userToken;
+        state.userToken = action.payload.token;
         state.isLoggedIn = true;
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+        state.userInfo.isAdmin = false;
       })
 
       // register user

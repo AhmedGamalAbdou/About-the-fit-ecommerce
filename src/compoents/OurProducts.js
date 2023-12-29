@@ -55,8 +55,8 @@ const OurProducts = () => {
             <div className="h-full flex   flex-wrap text-center">
               <img
                 className="object-cover w-[400px] h-[640px] "
-                alt="brownTrouser"
-                src="brownTrouser.jpg"
+                alt="blackTrouser"
+                src="Trouser.jpg"
               />
             </div>
           </div>

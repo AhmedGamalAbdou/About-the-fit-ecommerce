@@ -5,17 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const submitForm = async (data, e) => {
     e.preventDefault();
-    await dispatch(userLogin(data));
-    if (data.phoneNumber === '1234567891') {
+    await dispatch(userLogin(data)).then(() => {
       navigate("/dashboard");
-    } else {
-      navigate("/");
-    }
+    });
   };
 
   return (

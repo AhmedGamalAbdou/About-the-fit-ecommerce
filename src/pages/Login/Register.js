@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
