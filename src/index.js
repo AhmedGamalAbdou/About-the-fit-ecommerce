@@ -13,6 +13,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import Search from "./pages/Search";
 
 import Register from "./pages/Login/Register";
 import Login from "./pages/Login/Login";
@@ -53,6 +54,8 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
     ],
   },
+
+  { path: "search", element: <Search /> },
 
   {
     path: "/shop",

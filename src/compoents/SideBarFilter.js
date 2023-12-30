@@ -15,7 +15,7 @@ const SideBarFilter = () => {
   return loading ? (
     <Loading />
   ) : (
-    <div className=" md:flex md:mx-16 lg:mx-24 w-full  hidden mt-10 ">
+    <div className=" md:flex md:mx-16 lg:mx-24 w-full  hidden mt-10 z-50	">
       <ul className="space-y-8    px-2 pt-8 pb-8 flex flex-col  ">
         <p className="text-center uppercase text-xl"> Categories </p>
 
